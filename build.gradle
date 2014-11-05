@@ -1,0 +1,36 @@
+def download(src, dest) {
+  dest.parentFile.mkdirs()
+  ant.get(
+    src: src,
+    dest: dest,
+    verbose: true)
+}
+
+task nuget(type: GradleBuild) {
+  description 'Imports a nuget package into the repository. Usage:\n\t\t./gradlew nuget -Ppackage=moq@4.2.1409.1722'
+  doFirst {
+    def (packageId, revision) = project.property('package').split('@')
+    def url = "https://nuget.org/api/v2/package/$packageId/$revision"
+    def pkg = file("${System.properties['user.home']}/.nuget/${packageId}-${revision}.nupkg")
+    if (!pkg.exists ()) download(url, pkg)
+    def nugetBuildDir = file("$buildDir/$packageId")
+    def publishArtifact = 'publish-artifact.gradle'
+    copy {
+      from publishArtifact
+      into nugetBuildDir
+      rename(publishArtifact, 'build.gradle')
+    }
+    dir nugetBuildDir
+    startParameter.projectProperties = [
+      group: 'nuget',
+      version: revision,
+      repository: projectDir,
+      artifact: pkg
+    ]
+  }
+}
+
+task wrapper(type: Wrapper) {
+  description 'Generates the required ./gradlew files for a specific gradle version.'
+  gradleVersion '2.1'
+}

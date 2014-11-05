@@ -1,0 +1,17 @@
+apply plugin: 'ivy-publish'
+
+publishing {
+  repositories {
+    ivy {
+      url project.property('repository')
+    }
+  }
+
+  publications {
+    assemblies(IvyPublication) {
+      artifact file(project.property('artifact'))
+    }
+  }
+}
+
+defaultTasks 'publish'
