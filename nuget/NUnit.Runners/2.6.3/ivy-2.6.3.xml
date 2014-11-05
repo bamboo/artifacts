@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="nuget" module="NUnit.Runners" revision="2.6.3" status="integration" publication="20141105101143"/>
+  <configurations/>
+  <publications>
+    <artifact name="NUnit.Runners" type="nupkg" ext="nupkg"/>
+  </publications>
+  <dependencies/>
+</ivy-module>
