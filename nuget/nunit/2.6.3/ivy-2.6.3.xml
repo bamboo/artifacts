@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ivy-module version="2.0">
-  <info organisation="nuget" module="nunit" revision="2.6.3" status="integration" publication="20141104150623"/>
-  <configurations/>
-  <publications>
-    <artifact name="nunit" type="nupkg" ext="nupkg"/>
-  </publications>
-  <dependencies/>
-</ivy-module>
